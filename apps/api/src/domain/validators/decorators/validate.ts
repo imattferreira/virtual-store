@@ -24,7 +24,7 @@ interface IValidateFieldByRules {
   errors: Record<string, string>;
   field: string;
   fieldRules: object;
-  fields: object;
+  fields: Record<string, unknown>;
 }
 
 type Rules<T> = Partial<
@@ -72,6 +72,8 @@ function validateFieldByRules({
   const { length, required, size, type } = fieldRules as Partial<Validations>;
   const fieldValue = fields[field];
 
+  // TODO sanitize each value
+
   if (required && !fieldValue) {
     return { ...errors, [field]: VALIDATION_ERROR_MESSAGES.REQUIRED };
   }
@@ -104,7 +106,7 @@ function ValidateDecorator<Params extends object>(rules: Rules<Params>) {
     const method = descriptor.value;
 
     descriptor.value = function (...args: Array<unknown>) {
-      const fields = args[0] as object;
+      const fields = args[0] as Record<string, unknown>;
 
       const validationErrors = Object.entries(rules).reduce(
         (errors, [field, fieldRules]) =>
