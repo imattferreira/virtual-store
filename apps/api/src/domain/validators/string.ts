@@ -22,4 +22,6 @@ export const isEmailValid = (email: string) =>
   /[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-z-\\.]+/i.test(email);
 
 export const isPasswordValid = (password: string) =>
-  /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,32}$/.test(password);
+  /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?\/~_+-=|\]).{8,}$/g.test(
+    password
+  );

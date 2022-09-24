@@ -1,0 +1,20 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@faker-js/faker": "^7.5.0",
+    "@types/node": "^17.0.12",
+    "@vitest/ui": "^0.23.4",
+    "eslint": "7.32.0",
+    "eslint-config-custom": "*",
+    "tsconfig": "*",
+    "typescript": "^4.5.3",
+    "vitest": "^0.23.4"
+  },
+  "dependencies": {}
+}

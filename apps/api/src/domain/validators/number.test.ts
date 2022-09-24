@@ -6,14 +6,17 @@ const genRandomInt = (min = 0, max = 1000) =>
 
 describe("[number validator]", () => {
   describe("[hasValidRange]", () => {
-    it("should return true when the number is bigger than min range", () => {
-      const min = 10;
-      const num = genRandomInt(10);
+    it.concurrent(
+      "should return true when the number is bigger than min range",
+      () => {
+        const min = 10;
+        const num = genRandomInt(10);
 
-      const result = hasValidRange(num, { min });
+        const result = hasValidRange(num, { min });
 
-      expect(result).toBeTruthy();
-    });
+        expect(result).toBeTruthy();
+      }
+    );
 
     it("should return false when the number is less than min range", () => {
       const min = 20;
