@@ -1,16 +1,10 @@
-import { randomBytes } from "crypto";
-import { describe, expect, it } from "vitest";
+import { describe, it, expect } from "../../../../../tests";
+import { genRandomInt, genRandomStr } from "../../../../../tests/utils";
 import Product from "../../models/product";
 import FakeProductsRepository from "../../repositories/fakes/fake-products-repository";
 import CreateProductUseCase, {
   CreateProductParams,
 } from "./create-product-use-case";
-
-const genRandomInt = (min = 0, max = 1000) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
-
-const genRandomStr = (min = 1, max = 100) =>
-  randomBytes(genRandomInt(min, max)).toString("base64");
 
 const makeSut = () => {
   const productsRepository = new FakeProductsRepository();
@@ -21,7 +15,7 @@ const makeSut = () => {
 
 describe("[CreateProductUseCase]", () => {
   it.concurrent("should be able to register a new product", async () => {
-    const { createProductUseCase, productsRepository } = makeSut();
+    const { createProductUseCase } = makeSut();
     const data: CreateProductParams = {
       brandName: genRandomStr(5, 12),
       description: genRandomStr(30, 2000),

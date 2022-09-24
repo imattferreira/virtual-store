@@ -1,13 +1,7 @@
-import { randomBytes } from "crypto";
-import { faker } from "@faker-js/faker";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "../../tests";
+import faker from "../../tests/fakes";
+import { genRandomInt, genRandomStr } from "../../tests/utils";
 import { hasValidLengthRange, isEmailValid, isPasswordValid } from "./string";
-
-const genRandomInt = (min = 0, max = 1000) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
-
-const genRandomStr = (min = 1, max = 100) =>
-  randomBytes(genRandomInt(min, max)).toString("base64");
 
 describe("[string validator]", () => {
   describe("[hasValidLengthRange]", () => {
@@ -63,7 +57,7 @@ describe("[string validator]", () => {
 
   describe("[isEmailValid]", () => {
     it("should return true when the param is a valid email", () => {
-      const param = faker.internet.email();
+      const param = faker.email();
 
       const result = isEmailValid(param);
 
@@ -89,7 +83,7 @@ describe("[string validator]", () => {
 
   describe("[isPasswordValid]", () => {
     it("should return true when the param is a valid password", () => {
-      const param = faker.internet.password(18);
+      const param = faker.password(18);
 
       const result = isPasswordValid(param);
 
@@ -97,7 +91,7 @@ describe("[string validator]", () => {
     });
 
     it("should return true when the param has more than 60 characters", () => {
-      const param = faker.internet.password(60);
+      const param = faker.password(60);
       console.log("🚀 ~ file: string.test.ts ~ line 101 ~ it ~ param", param);
 
       const result = isPasswordValid(param);
@@ -106,7 +100,7 @@ describe("[string validator]", () => {
     });
 
     it("should return false when the param has less than 8 characters", () => {
-      const param = faker.internet.password(6);
+      const param = faker.password(6);
 
       const result = isPasswordValid(param);
 

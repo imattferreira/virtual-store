@@ -103,7 +103,7 @@ function ValidateDecorator<Params extends object>(rules: Rules<Params>) {
     propertyName: string,
     descriptor: PropertyDescriptor
   ) => {
-    const method = descriptor.value;
+    // const method = descriptor.value;
 
     descriptor.value = function (...args: Array<unknown>) {
       const fields = args[0] as Record<string, unknown>;

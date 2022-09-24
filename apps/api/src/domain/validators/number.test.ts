@@ -1,8 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "../../tests";
+import { genRandomInt } from "../../tests/utils";
 import { hasValidRange } from "./number";
-
-const genRandomInt = (min = 0, max = 1000) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
 
 describe("[number validator]", () => {
   describe("[hasValidRange]", () => {

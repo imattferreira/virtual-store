@@ -1,4 +1,4 @@
-import Product from "../modules/products/models/product";
+import Product from "../models/product";
 
 export interface IProductPresentation {
   id: string;

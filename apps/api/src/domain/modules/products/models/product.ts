@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { genUUID } from "../../../../utils/string";
 
 interface IProduct {
   id: string;
@@ -28,7 +28,7 @@ class Product {
     }
 
     this.props = {
-      id: randomUUID(),
+      id: genUUID(),
       name,
       description,
       brandName,
