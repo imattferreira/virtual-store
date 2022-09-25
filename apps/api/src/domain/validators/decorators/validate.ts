@@ -4,6 +4,7 @@ import {
   isIdValid,
   isPasswordValid,
 } from "../string";
+import { hasValidRange } from "../number";
 import { isObjEmpty } from "../../../utils/object";
 
 type RulesByFieldType = "email" | "password" | "id";
@@ -83,18 +84,18 @@ function validateFieldByRules({
   }
 
   if (fieldValue) {
-    if (type && !isValidFieldType(field, type)) {
+    if (type && !isValidFieldType(fieldValue as string, type)) {
       return { ...errors, [field]: VALIDATION_ERROR_MESSAGES.INVALID };
     }
 
-    if (length && !hasValidLengthRange(field, length)) {
+    if (length && !hasValidLengthRange(fieldValue as string, length)) {
       return {
         ...errors,
         [field]: VALIDATION_ERROR_MESSAGES.INCORRECT_LENGTH,
       };
     }
 
-    if (size && !hasValidLengthRange(field, size)) {
+    if (size && !hasValidRange(fieldValue as number, size)) {
       return { ...errors, [field]: VALIDATION_ERROR_MESSAGES.INCORRECT_SIZE };
     }
   }
@@ -107,7 +108,7 @@ function ValidateDecorator<Params extends object>(rules: Rules<Params>) {
     propertyName: string,
     descriptor: PropertyDescriptor
   ) => {
-    // const method = descriptor.value;
+    const method = descriptor.value;
 
     descriptor.value = function (...args: Array<unknown>) {
       const fields = args[0] as Record<string, unknown>;
@@ -129,7 +130,7 @@ function ValidateDecorator<Params extends object>(rules: Rules<Params>) {
         throw new Error(errorMsg);
       }
 
-      return descriptor;
+      return method.apply(this, arguments);
     };
   };
 }

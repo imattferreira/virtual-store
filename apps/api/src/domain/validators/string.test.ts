@@ -97,7 +97,6 @@ describe("[string validator]", () => {
 
     it("should return true when the param has more than 60 characters", () => {
       const param = faker.password(60);
-      console.log("🚀 ~ file: string.test.ts ~ line 101 ~ it ~ param", param);
 
       const result = isPasswordValid(param);
 
@@ -147,7 +146,7 @@ describe("[string validator]", () => {
         const param = faker.id();
 
         const result = isIdValid(param);
-
+        
         expect(result).toBeTruthy();
       }
     );

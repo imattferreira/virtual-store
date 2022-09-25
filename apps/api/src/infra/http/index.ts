@@ -1,4 +1,6 @@
 import express from "express";
+import "express-async-errors";
+import "reflect-metadata";
 import App from "./App";
 
 const server = express();
