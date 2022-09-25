@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  database_dev:
+    container_name: "virtual_store_db_dev"
+    image: "postgres:14.1-alpine"
+    env_file:
+      - ../../.env.dev
+    ports:
+      - "54320:5432"
+    volumes:
+      - postgres_data:/data/postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

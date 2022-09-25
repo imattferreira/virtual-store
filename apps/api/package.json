@@ -2,19 +2,29 @@
   "name": "api",
   "version": "0.0.0",
   "scripts": {
+    "db:migrate": "dotenv -e .env.dev -- npx prisma db push",
+    "dev": "npm run services:up && npm run db:migrate",
+    "services:up": "docker-compose -f src/infra/docker-compose.yml up -d",
     "test": "vitest --ui",
     "test:coverage": "vitest run --coverage"
+  },
+  "prisma": {
+    "schema": "src/infra/database/schema.prisma"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@faker-js/faker": "^7.5.0",
     "@types/node": "^17.0.12",
     "@vitest/ui": "^0.23.4",
+    "dotenv-cli": "^6.0.0",
     "eslint": "7.32.0",
     "eslint-config-custom": "*",
+    "prisma": "^4.3.1",
     "tsconfig": "*",
     "typescript": "^4.5.3",
     "vitest": "^0.23.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@prisma/client": "^4.3.1"
+  }
 }
