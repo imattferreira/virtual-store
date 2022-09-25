@@ -1,3 +1,4 @@
+import { formattedUTCDate } from "../../../../utils/date";
 import { genUUID } from "../../../../utils/string";
 
 interface IProduct {
@@ -6,19 +7,31 @@ interface IProduct {
   price: number;
   quantity: number;
   description: string;
-  brandName: string;
+  brandId: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+}
+
+interface ICreateProduct
+  extends Omit<IProduct, "id" | "createdAt" | "updatedAt"> {
+  id?: string | null;
+  createdAt?: Date | string | null;
+  updatedAt?: Date | string | null;
 }
 
 class Product {
   private props: IProduct;
 
   constructor({
+    id = null,
     name,
     description,
-    brandName,
+    brandId,
     price,
     quantity,
-  }: Omit<IProduct, "id">) {
+    createdAt = null,
+    updatedAt = null,
+  }: ICreateProduct) {
     if (price <= 0) {
       throw new Error("invalid price");
     }
@@ -28,12 +41,14 @@ class Product {
     }
 
     this.props = {
-      id: genUUID(),
+      id: id ?? genUUID(),
       name,
       description,
-      brandName,
+      brandId,
       price: price * 100,
       quantity,
+      createdAt: createdAt ?? formattedUTCDate(),
+      updatedAt: updatedAt ?? formattedUTCDate(),
     };
   }
 
@@ -61,8 +76,16 @@ class Product {
     return this.props.description;
   }
 
-  get brandName(): string {
-    return this.props.brandName;
+  get brandId(): string {
+    return this.props.brandId;
+  }
+
+  get createdAt(): Date | string {
+    return this.props.createdAt;
+  }
+
+  get updatedAt(): Date | string {
+    return this.props.updatedAt;
   }
 }
 

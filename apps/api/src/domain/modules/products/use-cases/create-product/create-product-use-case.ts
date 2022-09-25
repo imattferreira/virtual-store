@@ -1,3 +1,4 @@
+// TODO sanitize each param
 import productPresentation, {
   IProductPresentation,
 } from "../../presentations/productPresentation";
@@ -10,7 +11,7 @@ export interface CreateProductParams {
   price: number;
   quantity: number;
   description: string;
-  brandName: string;
+  brandId: string;
 }
 
 export class CreateProductUseCase {
@@ -19,14 +20,14 @@ export class CreateProductUseCase {
   ) {}
 
   @Validate<CreateProductParams>({
-    brandName: { required: true },
+    brandId: { required: true, type: "id" },
     description: { required: true },
     name: { required: true },
     price: { required: true, size: { min: 0 } },
     quantity: { required: true, size: { min: 0 } },
   })
   async execute({
-    brandName,
+    brandId,
     description,
     name,
     price,
@@ -38,8 +39,14 @@ export class CreateProductUseCase {
       throw new Error("product already exists");
     }
 
+    // const brandExists = await this.brandsRepository.findById(brandId);
+
+    // if (!brandExists) {
+    //   throw new Error("brand id not found");
+    // }
+
     const product = new Product({
-      brandName,
+      brandId,
       description,
       name,
       price,

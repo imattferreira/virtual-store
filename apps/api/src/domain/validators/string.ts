@@ -18,10 +18,15 @@ export const hasValidLengthRange = (
   return true;
 };
 
-export const isEmailValid = (email: string) =>
+export const isEmailValid = (email: string): boolean =>
   /[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-z-\\.]+/i.test(email);
 
-export const isPasswordValid = (password: string) =>
+export const isPasswordValid = (password: string): boolean =>
   /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?\/~_+-=|\]).{8,}$/g.test(
     password
+  );
+
+export const isIdValid = (id: string): boolean =>
+  /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi.test(
+    id
   );

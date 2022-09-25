@@ -10,11 +10,11 @@ class CreateProductController {
   constructor(private readonly createProductUseCase: CreateProductUseCase) {}
 
   async handle(req: HttpRequest, res: HttpResponse): Promise<HttpResponse> {
-    const { brandName, description, name, price, quantity } =
+    const { brandId, description, name, price, quantity } =
       req.body as CreateProductParams;
 
     const result = await this.createProductUseCase.execute({
-      brandName,
+      brandId,
       description,
       name,
       price,

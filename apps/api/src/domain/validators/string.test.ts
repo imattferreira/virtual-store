@@ -1,7 +1,12 @@
 import { describe, it, expect } from "../../tests";
 import faker from "../../tests/fakes";
 import { genRandomInt, genRandomStr } from "../../tests/utils";
-import { hasValidLengthRange, isEmailValid, isPasswordValid } from "./string";
+import {
+  hasValidLengthRange,
+  isEmailValid,
+  isIdValid,
+  isPasswordValid,
+} from "./string";
 
 describe("[string validator]", () => {
   describe("[hasValidLengthRange]", () => {
@@ -130,6 +135,35 @@ describe("[string validator]", () => {
       )}`;
 
       const result = isPasswordValid(param);
+
+      expect(result).toBeFalsy();
+    });
+  });
+
+  describe("[isIdValid]", () => {
+    it.concurrent(
+      "should return true when the param is a valid UUID v4",
+      () => {
+        const param = faker.id();
+
+        const result = isIdValid(param);
+
+        expect(result).toBeTruthy();
+      }
+    );
+
+    it("should return false when the param has less than of four dashes", () => {
+      const param = faker.id().split("-").slice(0, 3).join("-");
+
+      const result = isIdValid(param);
+
+      expect(result).toBeFalsy();
+    });
+
+    it("should return false when the param has special characters different of dashes", () => {
+      const param = faker.id().replace(/[0-9]/i, "#");
+
+      const result = isIdValid(param);
 
       expect(result).toBeFalsy();
     });

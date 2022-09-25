@@ -1,13 +1,40 @@
+import database from "../../../../../infra/database";
 import Product from "../../models/product";
 import IProductsRepository from "../interfaces/products-repository";
 
 class ProductsRepository implements IProductsRepository {
-  create(params: Product): Promise<void> {
-    throw new Error("Method not implemented.");
+  async create({
+    id,
+    brandId,
+    createdAt,
+    description,
+    name,
+    price,
+    quantity,
+    updatedAt,
+  }: Product): Promise<void> {
+    await database.product.create({
+      data: {
+        description,
+        id,
+        name,
+        price,
+        quantity,
+        brandId,
+        updatedAt,
+        createdAt,
+      },
+    });
   }
 
-  findByName(name: string): Promise<Product | null> {
-    throw new Error("Method not implemented.");
+  async findByName(name: string): Promise<Product | null> {
+    const product = await database.product.findUnique({ where: { name } });
+
+    if (!product) {
+      return null;
+    }
+
+    return new Product(product);
   }
 }
 

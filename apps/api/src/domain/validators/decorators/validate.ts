@@ -1,7 +1,12 @@
-import { hasValidLengthRange, isEmailValid, isPasswordValid } from "../string";
+import {
+  hasValidLengthRange,
+  isEmailValid,
+  isIdValid,
+  isPasswordValid,
+} from "../string";
 import { isObjEmpty } from "../../../utils/object";
 
-type RulesByFieldType = "email" | "password";
+type RulesByFieldType = "email" | "password" | "id";
 
 export interface RulesByFieldLength {
   min: number;
@@ -40,6 +45,7 @@ const VALIDATION_ERROR_MESSAGES = {
 const VALIDATIONS = {
   email: isEmailValid,
   password: isPasswordValid,
+  id: isIdValid,
 };
 
 const isValidFieldType = (field: string, type: RulesByFieldType) =>
@@ -71,8 +77,6 @@ function validateFieldByRules({
 
   const { length, required, size, type } = fieldRules as Partial<Validations>;
   const fieldValue = fields[field];
-
-  // TODO sanitize each value
 
   if (required && !fieldValue) {
     return { ...errors, [field]: VALIDATION_ERROR_MESSAGES.REQUIRED };
