@@ -36,6 +36,12 @@ class ProductsRepository implements IProductsRepository {
 
     return new Product(product);
   }
+
+  async findAll(): Promise<Product[]> {
+    const products = await database.product.findMany();
+
+    return products.map((product) => new Product(product));
+  }
 }
 
 export default new ProductsRepository();

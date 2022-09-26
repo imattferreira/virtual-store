@@ -1,5 +1,6 @@
 // TODO sanitize each param
 // TODO create custom errors
+// TODO return like { product: { } }
 import productPresentation, {
   IProductPresentation,
 } from "../../presentations/product-presentation";

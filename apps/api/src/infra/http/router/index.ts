@@ -1,5 +1,6 @@
 import CreateBrandFactory from "../../../domain/modules/brands/use-cases/create-brand/create-brand-factory";
 import CreateProductFactory from "../../../domain/modules/products/use-cases/create-product/create-product-factory";
+import ListProductsFactory from "../../../domain/modules/products/use-cases/list-products/list-products-factory";
 import { HttpRequest, HttpResponse, Server } from "../interfaces";
 
 function router(server: Server) {
@@ -8,6 +9,9 @@ function router(server: Server) {
   );
   server.post("/brands", (req: HttpRequest, res: HttpResponse) =>
     new CreateBrandFactory().init(req, res)
+  );
+  server.get("/products", (req: HttpRequest, res: HttpResponse) =>
+    new ListProductsFactory().init(req, res)
   );
 }
 

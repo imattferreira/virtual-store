@@ -21,6 +21,10 @@ class FakeProductsRepository implements IProductsRepository {
       setTimeout(() => resolve(new Product(product)), 120)
     );
   }
+
+  async findAll(): Promise<Product[]> {
+    return this.repository.map((product) => new Product(product));
+  }
 }
 
 export default FakeProductsRepository;
