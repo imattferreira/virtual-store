@@ -17,7 +17,9 @@ class FakeProductsRepository implements IProductsRepository {
       return new Promise((resolve) => setTimeout(() => resolve(null), 120));
     }
 
-    return new Promise((resolve) => setTimeout(() => resolve(product), 120));
+    return new Promise((resolve) =>
+      setTimeout(() => resolve(new Product(product)), 120)
+    );
   }
 }
 

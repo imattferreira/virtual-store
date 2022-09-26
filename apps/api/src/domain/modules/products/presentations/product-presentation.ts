@@ -6,23 +6,29 @@ export interface IProductPresentation {
   price: number;
   quantity: number;
   description: string;
-  brandName: string;
+  brandId: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 const productPresentation = ({
   id,
   name,
-  brandName,
+  brandId,
   description,
   formattedPrice,
   quantity,
+  createdAt,
+  updatedAt,
 }: Product): IProductPresentation => ({
   id,
   name,
-  brandName,
+  brandId,
   description,
   price: formattedPrice,
   quantity,
+  createdAt,
+  updatedAt,
 });
 
 export default productPresentation;

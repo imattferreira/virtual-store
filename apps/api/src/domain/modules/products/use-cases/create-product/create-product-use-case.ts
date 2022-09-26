@@ -2,7 +2,7 @@
 // TODO create custom errors
 import productPresentation, {
   IProductPresentation,
-} from "../../presentations/productPresentation";
+} from "../../presentations/product-presentation";
 import Validate from "../../../../validators/decorators/validate";
 import Product from "../../models/product";
 import IProductsRepository from "../../repositories/interfaces/products-repository";
@@ -22,7 +22,7 @@ export class CreateProductUseCase {
 
   @Validate<CreateProductParams>({
     brandId: { required: true, type: "id" },
-    description: { required: true },
+    description: { required: true, length: { min: 0 } },
     name: { required: true },
     price: { required: true, size: { min: 0 } },
     quantity: { required: true, size: { min: 0 } },

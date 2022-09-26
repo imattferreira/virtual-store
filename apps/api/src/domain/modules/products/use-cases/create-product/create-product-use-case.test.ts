@@ -26,6 +26,7 @@ describe("[CreateProductUseCase]", () => {
     };
 
     const result = await createProductUseCase.execute(data);
+
     expect(result).toBeInstanceOf(Product);
     expect(result).toHaveProperty("id");
   });
@@ -42,7 +43,7 @@ describe("[CreateProductUseCase]", () => {
 
     await createProductUseCase.execute(data);
 
-    expect(productsRepository).toBeCalledTimes(1);
+    expect(productsRepository).toHaveBeenCalledOnce();
   });
 
   it("should not be able to register a product with invalid price", async () => {
