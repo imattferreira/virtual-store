@@ -65,7 +65,7 @@ describe("[CreateProductUseCase]", () => {
       quantity: genRandomInt(1, 1200),
     };
 
-    expect(createProductUseCase.execute(data)).resolves.toThrowError(
+    await expect(createProductUseCase.execute(data)).rejects.toThrowError(
       "invalid price"
     );
   });
@@ -86,7 +86,7 @@ describe("[CreateProductUseCase]", () => {
       quantity: genRandomInt(-1011, 0),
     };
 
-    expect(createProductUseCase.execute(data)).resolves.toThrowError(
+    await expect(createProductUseCase.execute(data)).rejects.toThrowError(
       "invalid quantity"
     );
   });
@@ -109,7 +109,7 @@ describe("[CreateProductUseCase]", () => {
 
     await createProductUseCase.execute(data);
 
-    expect(createProductUseCase.execute(data)).resolves.toThrowError(
+    await expect(createProductUseCase.execute(data)).rejects.toThrowError(
       "product already exists"
     );
   });
@@ -130,7 +130,7 @@ describe("[CreateProductUseCase]", () => {
       quantity: genRandomInt(1, 1200),
     };
 
-    expect(createProductUseCase.execute(data)).resolves.toThrow(
+    await expect(createProductUseCase.execute(data)).rejects.toThrowError(
       "brand id not found"
     );
   });

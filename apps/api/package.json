@@ -5,7 +5,7 @@
     "db:migrate": "dotenv -e .env.dev -- npx prisma db push",
     "dev": "npm run services:up && npm run db:migrate && ts-node-dev --respawn --transpile-only ./src/infra/http/index.ts",
     "services:up": "docker-compose -f src/infra/docker-compose.yml up -d",
-    "test": "vitest --ui",
+    "test": "vitest --ui --watch",
     "test:coverage": "vitest run --coverage"
   },
   "prisma": {
@@ -16,6 +16,7 @@
     "@faker-js/faker": "^7.5.0",
     "@types/express": "^4.17.14",
     "@types/node": "^17.0.12",
+    "@vitest/coverage-c8": "^0.23.4",
     "@vitest/ui": "^0.23.4",
     "dotenv-cli": "^6.0.0",
     "eslint": "7.32.0",

@@ -20,20 +20,10 @@ describe("[CreateBrandUseCase]", () => {
 
     const result = await createBrandUseCase.execute(data);
 
-    expect(result).toBeInstanceOf(Brand);
     expect(result).toHaveProperty("id");
-    expect(fakeBrandsRepository.findById(result.id)).not.toBeNull();
-  });
-
-  it("should be able to call once the BrandsRepository when create a new brand", async () => {
-    const { createBrandUseCase, fakeBrandsRepository } = makeSut();
-    const data: CreateBrandParams = {
-      name: genRandomStr(10, 20),
-    };
-
-    await createBrandUseCase.execute(data);
-
-    expect(fakeBrandsRepository).toHaveBeenCalledOnce();
+    await expect(
+      fakeBrandsRepository.findById(result.id)
+    ).resolves.toBeInstanceOf(Brand);
   });
 
   it("should not be able to create a already existing brand", async () => {
@@ -44,16 +34,8 @@ describe("[CreateBrandUseCase]", () => {
 
     await createBrandUseCase.execute(data);
 
-    expect(createBrandUseCase.execute(data)).resolves.toThrow(
+    await expect(createBrandUseCase.execute(data)).rejects.toThrowError(
       "brand already exists"
-    );
-  });
-
-  it("should not be able to create a brand with an empty name", async () => {
-    const { createBrandUseCase } = makeSut();
-
-    expect(createBrandUseCase.execute({ name: "" })).resolves.toThrowError(
-      "field is required"
     );
   });
 });

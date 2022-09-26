@@ -88,15 +88,7 @@ describe("[string validator]", () => {
 
   describe("[isPasswordValid]", () => {
     it("should return true when the param is a valid password", () => {
-      const param = faker.password(18);
-
-      const result = isPasswordValid(param);
-
-      expect(result).toBeTruthy();
-    });
-
-    it("should return true when the param has more than 60 characters", () => {
-      const param = faker.password(60);
+      const param = `${faker.password(18)}#2!`;
 
       const result = isPasswordValid(param);
 
@@ -146,7 +138,7 @@ describe("[string validator]", () => {
         const param = faker.id();
 
         const result = isIdValid(param);
-        
+
         expect(result).toBeTruthy();
       }
     );
