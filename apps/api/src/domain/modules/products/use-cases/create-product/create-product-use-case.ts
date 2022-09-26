@@ -6,6 +6,7 @@ import productPresentation, {
 import Validate from "../../../../validators/decorators/validate";
 import Product from "../../models/product";
 import IProductsRepository from "../../repositories/interfaces/products-repository";
+import IBrandsRepository from "../../../brands/repositories/interfaces/brands-repository";
 
 export interface CreateProductParams {
   name: string;
@@ -17,7 +18,8 @@ export interface CreateProductParams {
 
 export class CreateProductUseCase {
   constructor(
-    private readonly productsRepository: IProductsRepository // private readonly BrandsRepository: any
+    private readonly productsRepository: IProductsRepository,
+    private readonly brandsRepository: IBrandsRepository
   ) {}
 
   @Validate<CreateProductParams>({
@@ -40,11 +42,11 @@ export class CreateProductUseCase {
       throw new Error("product already exists");
     }
 
-    // const brandExists = await this.brandsRepository.findById(brandId);
+    const brandExists = await this.brandsRepository.findById(brandId);
 
-    // if (!brandExists) {
-    //   throw new Error("brand id not found");
-    // }
+    if (!brandExists) {
+      throw new Error("brand id not found");
+    }
 
     const product = new Product({
       brandId,

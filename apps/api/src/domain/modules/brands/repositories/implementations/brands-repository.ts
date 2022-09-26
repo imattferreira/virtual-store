@@ -1,10 +1,9 @@
 import Brand from "../../models/brand";
 import database from "../../../../../infra/database";
-import Product from "../../models/brand";
 import IBrandsRepository from "../interfaces/brands-repository";
 
 class BrandsRepository implements IBrandsRepository {
-  async create({ id, name, createdAt, updatedAt }: Product): Promise<void> {
+  async create({ id, name, createdAt, updatedAt }: Brand): Promise<void> {
     database.brand.create({
       data: { id, name, createdAt, updatedAt },
     });
