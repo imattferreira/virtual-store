@@ -1,7 +1,7 @@
 function HomePage() {
   return (
     <div>
-      <h1>Web</h1>
+      {/* <h1>Web</h1> */}
       <button>Test</button>
     </div>
   );

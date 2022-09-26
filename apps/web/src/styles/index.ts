@@ -2,7 +2,7 @@ import { createStitches, PropertyValue } from "@stitches/react";
 
 type UtilProp = string | number;
 
-export const { styled, getCssText } = createStitches({
+export const { styled, getCssText, globalCss } = createStitches({
   theme: {
     colors: {
       blue100: "#D7F0FE",
