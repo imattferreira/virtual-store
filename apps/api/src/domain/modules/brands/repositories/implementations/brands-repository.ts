@@ -4,7 +4,7 @@ import IBrandsRepository from "../interfaces/brands-repository";
 
 class BrandsRepository implements IBrandsRepository {
   async create({ id, name, createdAt, updatedAt }: Brand): Promise<void> {
-    database.brand.create({
+    await database.brand.create({
       data: { id, name, createdAt, updatedAt },
     });
   }
