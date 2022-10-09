@@ -3,6 +3,7 @@ import Product from "../models/product";
 export interface IProductPresentation {
   id: string;
   name: string;
+  slug: string;
   price: number;
   quantity: number;
   description: string;
@@ -14,6 +15,7 @@ export interface IProductPresentation {
 const productPresentation = ({
   id,
   name,
+  slug,
   brandId,
   description,
   formattedPrice,
@@ -23,6 +25,7 @@ const productPresentation = ({
 }: Product): IProductPresentation => ({
   id,
   name,
+  slug,
   brandId,
   description,
   price: formattedPrice,

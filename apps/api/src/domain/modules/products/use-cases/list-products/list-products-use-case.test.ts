@@ -6,7 +6,11 @@ import FakeProductsRepository from "../../repositories/fakes/fake-products-repos
 import { CreateProductParams } from "../create-product/create-product-use-case";
 import ListProductsUseCase from "./list-products-use-case";
 
-const genProduct = (): CreateProductParams => ({
+interface ICreateProduct extends CreateProductParams {
+  slug: string;
+}
+
+const genProduct = (): ICreateProduct => ({
   brandId: fakes.id(),
   slug: genRandomStr(15, 52).toLowerCase(),
   description: genRandomStr(30, 2000),

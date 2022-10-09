@@ -6,6 +6,7 @@ class ProductsRepository implements IProductsRepository {
   async create({
     id,
     brandId,
+    slug,
     createdAt,
     description,
     name,
@@ -17,6 +18,7 @@ class ProductsRepository implements IProductsRepository {
       data: {
         description,
         id,
+        slug,
         name,
         price,
         quantity,

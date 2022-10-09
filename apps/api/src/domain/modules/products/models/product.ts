@@ -14,7 +14,7 @@ interface IProduct {
 }
 
 interface ICreateProduct
-  extends Omit<IProduct, "id" | "createdAt" | "updatedAt"> {
+  extends Omit<IProduct, "id" | "createdAt" | "updatedAt" | "slug"> {
   id?: string | null;
   createdAt?: Date | string | null;
   updatedAt?: Date | string | null;
@@ -26,7 +26,6 @@ class Product {
   constructor({
     id = null,
     name,
-    slug,
     description,
     brandId,
     price,
@@ -41,6 +40,8 @@ class Product {
     if (quantity <= 0) {
       throw new Error("invalid quantity");
     }
+
+    const slug = name.split(" ").join("-").toLowerCase();
 
     this.props = {
       id: id ?? genUUID(),
