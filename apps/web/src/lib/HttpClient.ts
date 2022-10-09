@@ -17,28 +17,22 @@ class HttpClient {
   ) {
     const { body, headers } = options;
 
-    try {
-      const url = API_URL + endpoint;
+    const url = API_URL + endpoint;
 
-      const response = await fetch(url, {
-        body: JSON.stringify(body),
-        headers,
-        method,
-      });
+    const response = await fetch(url, {
+      body: JSON.stringify(body),
+      headers,
+      method,
+    });
 
-      if (response.ok) {
-        const result = await response.json();
+    const result = await response.json();
 
-        // TODO improve
-        if (result?.status && result.status > 299) {
-          throw new Error("request error");
-        }
-
-        return result as T;
-      }
-    } catch (err) {
+    // TODO improve
+    if (result?.status && result.status > 299) {
       throw new Error("request error");
     }
+
+    return result as T;
   }
 
   get<T extends object>(endpoint: string) {
