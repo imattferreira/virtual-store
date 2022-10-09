@@ -1,7 +1,7 @@
 import type { GetStaticProps } from "next";
 import ProductCard from "../components/ProductCard";
-import { Product } from "../entities/Product";
-import ProductRepository from "../HttpRepository/ProductRepository";
+import { Product } from "../app/entities/Product";
+import ProductRepository from "../app/HttpRepository/ProductRepository";
 
 type PageProps = {
   products: Product[];

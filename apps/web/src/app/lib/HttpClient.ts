@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3333";
+import API from "../configs/api";
 
 type HttpMethods = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -8,7 +8,7 @@ interface RequestOptions {
 }
 
 class HttpClient {
-  constructor(private readonly url = API_URL) {}
+  constructor(private readonly url = API.URL) {}
 
   private async request<T extends object>(
     endpoint: string,
@@ -17,9 +17,9 @@ class HttpClient {
   ) {
     const { body, headers } = options;
 
-    const url = API_URL + endpoint;
+    const completeUrl = this.url + endpoint;
 
-    const response = await fetch(url, {
+    const response = await fetch(completeUrl, {
       body: JSON.stringify(body),
       headers,
       method,
