@@ -186,10 +186,10 @@ export const { styled, getCssText, globalCss } = createStitches({
     },
   },
   media: {
-    sm: "max-width: 480px",
-    md: "max-width: 768px",
-    lg: "max-width: 1024px",
-    xl: "max-width: 1400px",
+    sm: "(max-width: 480px)",
+    md: "(max-width: 768px)",
+    lg: "(max-width: 1024px)",
+    xl: "(max-width: 1400px)",
   },
   utils: {
     m: (value: UtilProp) => ({ margin: value }),

@@ -1,3 +1,4 @@
+// TODO create unit tests
 import { FiShoppingCart } from "react-icons/fi";
 import Link from "../Link";
 
