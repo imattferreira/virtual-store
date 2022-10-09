@@ -1,34 +1,37 @@
 import { FiShoppingCart } from "react-icons/fi";
+import Link from "../Link";
 import { Container } from "./styles";
 
 type ProductCardProps = {
   image: string;
-  link: string;
+  slug: string;
   price: number;
-  title: string;
+  name: string;
 };
 
-function ProductCard({}: Partial<ProductCardProps>) {
+function ProductCard({ image, name, price, slug }: ProductCardProps) {
   return (
-    <Container>
-      <img
-        src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16-spacegray-select-202110?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1632788574000"
-        alt=""
-        width="190"
-        height="190"
-      />
-      <div>
-        <h3>
-          Macbook PRO 16 polegadas 32 de RAM e m1 pro max asda asdadasdas dsad
-          sadasd sdasdsadasd asdasdsa asdasdsa sadasd asd{" "}
-        </h3>
-        <p>R$ 14.900,99</p>
-        <button aria-label="open cart">
-          <span>Adicionar</span>
-          <FiShoppingCart />
-        </button>
-      </div>
-    </Container>
+    <Link link={`/product/${slug}`}>
+      <Container>
+        <article>
+          <img
+            src={image}
+            alt={`imagem do produto ${name}`}
+            width="190"
+            height="190"
+          />
+          <div>
+            <h3>{name}</h3>
+            {/* TODO format better */}
+            <p>R$ {price}</p>
+            <button aria-label="open cart">
+              <span>Adicionar</span>
+              <FiShoppingCart />
+            </button>
+          </div>
+        </article>
+      </Container>
+    </Link>
   );
 }
 

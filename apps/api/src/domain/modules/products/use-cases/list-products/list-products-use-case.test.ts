@@ -36,6 +36,9 @@ describe("[ListProductsUseCase]", () => {
     fakeProductsRepository.create(new Product(genProduct()));
     fakeProductsRepository.create(new Product(genProduct()));
 
-    await expect(listProductsUseCase.execute()).resolves.toHaveLength(10);
+    const result = await listProductsUseCase.execute();
+
+    expect(result).toHaveProperty("products");
+    expect(result.products).toHaveLength(10);
   });
 });
