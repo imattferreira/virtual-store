@@ -3,16 +3,19 @@ import productPresentation, {
 } from "../../presentations/product-presentation";
 import IProductsRepository from "../../repositories/interfaces/products-repository";
 
+interface IListProductsResult {
+  products: IProductPresentation[];
+}
+
 // TODO implement pagination
 // TODO implement filters
-// TODO return like { products: [] }
 class ListProductsUseCase {
   constructor(private readonly productsRepository: IProductsRepository) {}
 
-  async execute(): Promise<IProductPresentation[]> {
+  async execute(): Promise<IListProductsResult> {
     const products = await this.productsRepository.findAll();
 
-    return products.map(productPresentation);
+    return { products: products.map(productPresentation) };
   }
 }
 
