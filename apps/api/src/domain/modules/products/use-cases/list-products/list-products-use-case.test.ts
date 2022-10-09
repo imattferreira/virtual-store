@@ -8,6 +8,7 @@ import ListProductsUseCase from "./list-products-use-case";
 
 const genProduct = (): CreateProductParams => ({
   brandId: fakes.id(),
+  slug: genRandomStr(15, 52).toLowerCase(),
   description: genRandomStr(30, 2000),
   name: genRandomStr(15, 52),
   price: genRandomInt(1, 152000) / 100,
@@ -22,7 +23,7 @@ const makeSut = () => {
 };
 
 describe("[ListProductsUseCase]", () => {
-  it("should be able to list all products", async () => {
+  it.concurrent("should be able to list all products", async () => {
     const { fakeProductsRepository, listProductsUseCase } = makeSut();
 
     fakeProductsRepository.create(new Product(genProduct()));

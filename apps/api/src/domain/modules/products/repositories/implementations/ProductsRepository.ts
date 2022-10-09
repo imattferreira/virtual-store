@@ -37,6 +37,16 @@ class ProductsRepository implements IProductsRepository {
     return new Product(product);
   }
 
+  async findBySlug(slug: string): Promise<Product | null> {
+    const product = await database.product.findUnique({ where: { slug } });
+
+    if (!product) {
+      return null;
+    }
+
+    return new Product(product);
+  }
+
   async findAll(): Promise<Product[]> {
     const products = await database.product.findMany();
 

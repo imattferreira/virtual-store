@@ -21,6 +21,7 @@ model Brand {
 model Product {
   id          String   @id @unique
   name        String   @unique
+  slug        String   @unique
   price       Int
   quantity    Int
   description String

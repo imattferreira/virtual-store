@@ -4,6 +4,7 @@ import { genUUID } from "../../../../utils/string";
 interface IProduct {
   id: string;
   name: string;
+  slug: string;
   price: number;
   quantity: number;
   description: string;
@@ -25,6 +26,7 @@ class Product {
   constructor({
     id = null,
     name,
+    slug,
     description,
     brandId,
     price,
@@ -43,6 +45,7 @@ class Product {
     this.props = {
       id: id ?? genUUID(),
       name,
+      slug,
       description,
       brandId,
       price: price * 100,
@@ -58,6 +61,10 @@ class Product {
 
   get name() {
     return this.props.name;
+  }
+
+  get slug() {
+    return this.props.slug;
   }
 
   get price(): number {

@@ -22,6 +22,20 @@ class FakeProductsRepository implements IProductsRepository {
     );
   }
 
+  findBySlug(slug: string): Promise<Product | null> {
+    const product = this.repository.find(
+      ({ slug: productSlug }) => productSlug === slug
+    );
+
+    if (!product) {
+      return new Promise((resolve) => setTimeout(() => resolve(null), 120));
+    }
+
+    return new Promise((resolve) =>
+      setTimeout(() => resolve(new Product(product)), 120)
+    );
+  }
+
   async findAll(): Promise<Product[]> {
     return this.repository.map((product) => new Product(product));
   }
