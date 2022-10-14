@@ -1,26 +1,31 @@
 import type { GetStaticProps } from "next";
 import ProductCard from "../components/ProductCard";
-import { Product } from "../app/entities/Product";
+import type { Product } from "../app/entities/Product";
 import ProductRepository from "../app/HttpRepository/ProductRepository";
+import VirtualGridList from "../components/VirtualGridList";
 
 type PageProps = {
   products: Product[];
 };
 
 function HomePage({ products }: PageProps) {
+  // TODO implement SWR
+
   return (
     <div>
-      <div>
-        {products.map(({ id, name, price }) => (
+      <VirtualGridList<Product>
+        cols={5}
+        items={products}
+        render={({ id, name, price }) => (
           <ProductCard
             key={id}
+            image="test"
             name={name}
-            image="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16-spacegray-select-202110?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1632788574000"
-            slug=""
             price={price}
+            slug="slggg"
           />
-        ))}
-      </div>
+        )}
+      />
     </div>
   );
 }

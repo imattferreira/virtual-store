@@ -19,6 +19,7 @@ export default globalCss({
     },
   },
   a: {
+    color: '$blue600',
     textDecoration: "none",
   },
   button: {

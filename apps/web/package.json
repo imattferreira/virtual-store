@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",
+    "@tanstack/react-virtual": "^3.0.0-beta.18",
     "next": "12.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
