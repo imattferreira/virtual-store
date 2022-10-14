@@ -3,11 +3,12 @@ import {
   isEmailValid,
   isIdValid,
   isPasswordValid,
+  isImageValid,
 } from "../string";
 import { hasValidRange } from "../number";
 import { isObjEmpty } from "../../../utils/object";
 
-type RulesByFieldType = "email" | "password" | "id";
+type RulesByFieldType = "email" | "password" | "id" | "image";
 
 export interface RulesByFieldLength {
   min: number;
@@ -43,10 +44,11 @@ const VALIDATION_ERROR_MESSAGES = {
   INVALID: "invalid field",
   REQUIRED: "field is required",
 };
-const VALIDATIONS = {
+const VALIDATIONS: Record<RulesByFieldType, Function> = {
   email: isEmailValid,
   password: isPasswordValid,
   id: isIdValid,
+  image: isImageValid,
 };
 
 const isValidFieldType = (field: string, type: RulesByFieldType) =>

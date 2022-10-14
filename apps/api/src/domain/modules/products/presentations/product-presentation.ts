@@ -5,6 +5,7 @@ export interface IProductPresentation {
   name: string;
   slug: string;
   price: number;
+  image: string;
   quantity: number;
   description: string;
   brandId: string;
@@ -18,6 +19,7 @@ const productPresentation = ({
   slug,
   brandId,
   description,
+  image,
   formattedPrice,
   quantity,
   createdAt,
@@ -28,6 +30,7 @@ const productPresentation = ({
   slug,
   brandId,
   description,
+  image,
   price: formattedPrice,
   quantity,
   createdAt,

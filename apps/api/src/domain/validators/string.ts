@@ -28,3 +28,6 @@ export const isIdValid = (id: string): boolean =>
   /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi.test(
     id
   );
+
+export const isImageValid = (image: string): boolean =>
+  /^(https:\/\/www.|\/)[a-zA-Z0-9]+.(webp|png|jpg|jpeg)$/g.test(image);

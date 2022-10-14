@@ -12,6 +12,7 @@ import IBrandsRepository from "../../../brands/repositories/interfaces/brands-re
 export interface CreateProductParams {
   name: string;
   price: number;
+  image: string;
   quantity: number;
   description: string;
   brandId: string;
@@ -27,12 +28,14 @@ export class CreateProductUseCase {
     brandId: { required: true, type: "id" },
     description: { required: true, length: { min: 0 } },
     name: { required: true },
+    image: { type: "image", required: true },
     price: { required: true, size: { min: 0 } },
     quantity: { required: true, size: { min: 0 } },
   })
   async execute({
     brandId,
     description,
+    image,
     name,
     price,
     quantity,
@@ -41,6 +44,12 @@ export class CreateProductUseCase {
 
     if (productAlreadyExists) {
       throw new Error("product already exists");
+    }
+
+    const isImageFromSameDomain = image.startsWith("/");
+
+    if (!isImageFromSameDomain) {
+      throw new Error("invalid image url");
     }
 
     const brandExists = await this.brandsRepository.findById(brandId);
@@ -52,6 +61,7 @@ export class CreateProductUseCase {
     const product = new Product({
       brandId,
       description,
+      image,
       name,
       price,
       quantity,

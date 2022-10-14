@@ -5,8 +5,15 @@ import {
   hasValidLengthRange,
   isEmailValid,
   isIdValid,
+  isImageValid,
   isPasswordValid,
 } from "./string";
+
+const makeImageName = () =>
+  genRandomStr(10, 30)
+    .split("")
+    .filter((letter) => /[a-z0-9]/i.test(letter))
+    .join("");
 
 describe("[string validator]", () => {
   describe("[hasValidLengthRange]", () => {
@@ -157,6 +164,38 @@ describe("[string validator]", () => {
       const result = isIdValid(param);
 
       expect(result).toBeFalsy();
+    });
+  });
+
+  describe("[isImageValid]", () => {
+    it("should return true if image url is a WEBP MIME type", () => {
+      expect(isImageValid(`/${makeImageName()}.webp`)).toBeTruthy();
+    });
+
+    it("should return true if image url is a PNG MIME type", () => {
+      expect(isImageValid(`/${makeImageName()}.png`)).toBeTruthy();
+    });
+
+    it("should return true if image url is a JPG MIME type", () => {
+      expect(isImageValid(`/${makeImageName()}.jpg`)).toBeTruthy();
+    });
+
+    it("should return true if image url is a JPEG MIME type", () => {
+      expect(isImageValid(`/${makeImageName()}.jpeg`)).toBeTruthy();
+    });
+
+    it("should return false if image extension is in upper case", () => {
+      expect(isImageValid(`/${makeImageName()}.JPEG`)).toBeFalsy();
+    });
+
+    it("should return false if image url is a an unknown MIME type", () => {
+      expect(
+        isImageValid(`/${makeImageName()}.${genRandomStr(3, 4)}`)
+      ).toBeFalsy();
+    });
+
+    it("should return false if image url is a an common  url", () => {
+      expect(isImageValid(`https://${makeImageName()}.com`)).toBeFalsy();
     });
   });
 });

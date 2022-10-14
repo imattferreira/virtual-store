@@ -6,6 +6,7 @@ interface IProduct {
   name: string;
   slug: string;
   price: number;
+  image: string;
   quantity: number;
   description: string;
   brandId: string;
@@ -29,6 +30,7 @@ class Product {
     description,
     brandId,
     price,
+    image,
     quantity,
     createdAt = null,
     updatedAt = null,
@@ -49,6 +51,7 @@ class Product {
       slug,
       description,
       brandId,
+      image,
       price: price * 100,
       quantity,
       createdAt: createdAt ?? formattedUTCDate(),
@@ -74,6 +77,10 @@ class Product {
 
   get formattedPrice(): number {
     return this.props.price / 100;
+  }
+
+  get image(): string {
+    return this.props.image;
   }
 
   get quantity(): number {

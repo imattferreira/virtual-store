@@ -44,15 +44,15 @@ function VirtualGridList<ItemType>({
   const rowVirtualizer = useVirtualizer({
     count: gridItems.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 50,
-    overscan: 5,
+    estimateSize: () => 50, // TODO
+    overscan: 5, // TODO
   });
 
   const columnVirtualizer = useVirtualizer({
-    count: cols,
+    count: cols, // TODO
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 100,
-    overscan: 5,
+    estimateSize: () => 100, // TODO
+    overscan: 5, // TODO
   });
 
   return (

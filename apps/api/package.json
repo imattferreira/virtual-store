@@ -2,7 +2,7 @@
   "name": "api",
   "version": "0.0.0",
   "scripts": {
-    "db:migrate": "dotenv -e .env.dev -- npx prisma db push",
+    "db:migrate": "dotenv -e .env.dev  -- npx prisma migrate dev -- npx prisma db push",
     "dev": "npm run services:up && npm run db:migrate && ts-node-dev --respawn --transpile-only ./src/infra/http/index.ts",
     "services:up": "docker-compose -f src/infra/docker-compose.yml up -d",
     "test": "vitest --ui --watch",

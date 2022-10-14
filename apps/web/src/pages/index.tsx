@@ -16,13 +16,13 @@ function HomePage({ products }: PageProps) {
       <VirtualGridList<Product>
         cols={5}
         items={products}
-        render={({ id, name, price }) => (
+        render={({ id, name, price, slug }) => (
           <ProductCard
             key={id}
             image="test"
             name={name}
             price={price}
-            slug="slggg"
+            slug={slug}
           />
         )}
       />
