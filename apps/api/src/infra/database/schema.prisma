@@ -11,11 +11,11 @@ datasource db {
 }
 
 model Brand {
-  id        String    @id @unique
-  name      String    @unique
-  products  Product[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now())
+  id         String    @id @unique
+  name       String    @unique
+  products   Product[]
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
 }
 
 model Product {
@@ -26,8 +26,8 @@ model Product {
   quantity    Int
   description String
   image       String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-  Brand       Brand?   @relation(fields: [brandId], references: [id])
-  brandId     String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now())
+  Brand       Brand?   @relation(fields: [brand_id], references: [id])
+  brand_id    String
 }
