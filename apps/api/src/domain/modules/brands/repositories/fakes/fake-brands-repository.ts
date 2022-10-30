@@ -1,11 +1,13 @@
 import Brand from "../../models/brand";
 import IBrandsRepository from "../interfaces/brands-repository";
+import { StoredBrand } from "../interfaces/stored-entities";
+import BrandMapper from "../mappers/brand-mapper";
 
 class FakeBrandsRepository implements IBrandsRepository {
-  repository: Brand[] = [];
+  repository: StoredBrand[] = [];
 
   async create(brand: Brand): Promise<void> {
-    this.repository.push(brand);
+    this.repository.push(BrandMapper.toPersistance(brand));
   }
 
   findById(id: string): Promise<Brand | null> {
@@ -16,7 +18,7 @@ class FakeBrandsRepository implements IBrandsRepository {
     }
 
     return new Promise((resolve) =>
-      setTimeout(() => resolve(new Brand(brand)), 120)
+      setTimeout(() => resolve(BrandMapper.toDomain(brand)), 120)
     );
   }
 
@@ -30,7 +32,7 @@ class FakeBrandsRepository implements IBrandsRepository {
     }
 
     return new Promise((resolve) =>
-      setTimeout(() => resolve(new Brand(brand)), 120)
+      setTimeout(() => resolve(BrandMapper.toDomain(brand)), 120)
     );
   }
 }
