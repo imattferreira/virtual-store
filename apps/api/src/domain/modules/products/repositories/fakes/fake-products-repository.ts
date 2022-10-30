@@ -1,11 +1,13 @@
 import Product from "../../models/product";
 import IProductsRepository from "../interfaces/products-repository";
+import { StoredProduct } from "../interfaces/stored-entities";
+import ProductMapper from "../mappers/product-mapper";
 
 class FakeProductsRepository implements IProductsRepository {
-  repository: Product[] = [];
+  repository: StoredProduct[] = [];
 
   async create(product: Product): Promise<void> {
-    this.repository.push(product);
+    this.repository.push(ProductMapper.toPersistance(product));
   }
 
   findByName(name: string): Promise<Product | null> {
@@ -18,7 +20,7 @@ class FakeProductsRepository implements IProductsRepository {
     }
 
     return new Promise((resolve) =>
-      setTimeout(() => resolve(new Product(product)), 120)
+      setTimeout(() => resolve(ProductMapper.toDomain(product)), 120)
     );
   }
 
@@ -32,12 +34,12 @@ class FakeProductsRepository implements IProductsRepository {
     }
 
     return new Promise((resolve) =>
-      setTimeout(() => resolve(new Product(product)), 120)
+      setTimeout(() => resolve(ProductMapper.toDomain(product)), 120)
     );
   }
 
   async findAll(): Promise<Product[]> {
-    return this.repository.map((product) => new Product(product));
+    return this.repository.map(ProductMapper.toDomain);
   }
 }
 

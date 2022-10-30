@@ -1,20 +1,24 @@
 import database from "../../../../../infra/database";
 import Product from "../../models/product";
 import IProductsRepository from "../interfaces/products-repository";
+import { StoredProduct } from "../interfaces/stored-entities";
+import ProductMapper from "../mappers/product-mapper";
 
 class ProductsRepository implements IProductsRepository {
-  async create({
-    id,
-    brandId,
-    slug,
-    createdAt,
-    image,
-    description,
-    name,
-    price,
-    quantity,
-    updatedAt,
-  }: Product): Promise<void> {
+  async create(product: Product): Promise<void> {
+    const {
+      brand_id,
+      created_at,
+      description,
+      id,
+      image,
+      name,
+      price,
+      quantity,
+      slug,
+      updated_at,
+    } = ProductMapper.toPersistance(product);
+
     await database.product.create({
       data: {
         description,
@@ -24,37 +28,42 @@ class ProductsRepository implements IProductsRepository {
         name,
         price,
         quantity,
-        brandId,
-        updatedAt,
-        createdAt,
+        brand_id,
+        created_at,
+        updated_at,
       },
     });
   }
 
   async findByName(name: string): Promise<Product | null> {
-    const product = await database.product.findUnique({ where: { name } });
+    const product = (await database.product.findUnique({
+      where: { name },
+    })) as StoredProduct | null;
 
     if (!product) {
       return null;
     }
 
-    return new Product(product);
+    return ProductMapper.toDomain(product);
   }
 
   async findBySlug(slug: string): Promise<Product | null> {
-    const product = await database.product.findUnique({ where: { slug } });
+    const product = (await database.product.findUnique({
+      where: { slug },
+    })) as StoredProduct | null;
 
     if (!product) {
       return null;
     }
 
-    return new Product(product);
+    return ProductMapper.toDomain(product);
   }
 
   async findAll(): Promise<Product[]> {
-    const products = await database.product.findMany();
+    const products = (await database.product.findMany()) as unknown as
+      | StoredProduct[];
 
-    return products.map((product) => new Product(product));
+    return products.map(ProductMapper.toDomain);
   }
 }
 
