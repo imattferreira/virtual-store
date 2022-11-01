@@ -1,4 +1,4 @@
-import Brand from "../../models/brand";
+import Brand from "../../entities/brand";
 import database from "../../../../../infra/database";
 import IBrandsRepository from "../interfaces/brands-repository";
 import BrandMapper from "../mappers/brand-mapper";

@@ -31,3 +31,31 @@ model Product {
   Brand       Brand?   @relation(fields: [brand_id], references: [id])
   brand_id    String
 }
+
+model Image {
+  id         String   @id @unique
+  name       String   @unique
+  path       String
+  created_at DateTime @default(now())
+}
+
+// TODO
+// model Role {
+//   id        String   @id @unique
+//   name      String   @unique
+//   actions   String[]
+//   User      User[]
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+// }
+
+// model User {
+//   id        String   @id @unique
+//   name      String
+//   email     String   @unique
+//   password  String
+//   Role      Role     @relation(fields: [roleId], references: [id])
+//   roleId    String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+// }

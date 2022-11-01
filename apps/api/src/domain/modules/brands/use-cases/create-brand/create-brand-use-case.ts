@@ -5,7 +5,7 @@ import brandPresentation, {
   IBrandPresentation,
 } from "../../presentations/brand-presentation";
 import Validate from "../../../../validators/decorators/validate";
-import Brand from "../../models/brand";
+import Brand from "../../entities/brand";
 import IBrandsRepository from "../../repositories/interfaces/brands-repository";
 
 export interface CreateBrandParams {

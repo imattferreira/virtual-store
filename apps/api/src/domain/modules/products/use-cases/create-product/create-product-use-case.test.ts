@@ -1,6 +1,6 @@
 import { describe, it, expect } from "../../../../../tests";
 import faker from "../../../../../tests/fakes";
-import Brand from "../../../brands/models/brand";
+import Brand from "../../../brands/entities/brand";
 import { genRandomInt, genRandomStr } from "../../../../../tests/utils";
 import FakeBrandsRepository from "../../../brands/repositories/fakes/fake-brands-repository";
 import Product from "../../models/product";

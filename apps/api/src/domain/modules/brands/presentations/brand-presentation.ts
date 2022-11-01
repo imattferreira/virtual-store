@@ -1,4 +1,4 @@
-import Brand from "../models/brand";
+import Brand from "../entities/brand";
 
 export interface IBrandPresentation {
   id: string;

@@ -24,18 +24,18 @@ function VirtualGridList<ItemType>({
 
     items.forEach((item, index) => {
       if (isFirstItem(index)) {
+        result.push([]);
+        return;
+      }
+
+      const column = getLastItem<ItemType[]>(result);
+
+      if (column.length === cols) {
         result.push([item]);
         return;
       }
 
-      const row = getLastItem<ItemType[]>(result);
-
-      if (row.length < cols) {
-        row.push(item);
-        return;
-      }
-
-      result.push([item]);
+      column.push(item);
     });
 
     return result;

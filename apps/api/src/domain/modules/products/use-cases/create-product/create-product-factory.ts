@@ -3,7 +3,7 @@ import {
   HttpResponse,
 } from "../../../../../infra/http/interfaces";
 import BrandsRepository from "../../../brands/repositories/implementations/brands-repository";
-import ProductsRepository from "../../repositories/implementations/ProductsRepository";
+import ProductsRepository from "../../repositories/implementations/products-repository";
 import CreateProductController from "./create-product-controller";
 import CreateProductUseCase from "./create-product-use-case";
 

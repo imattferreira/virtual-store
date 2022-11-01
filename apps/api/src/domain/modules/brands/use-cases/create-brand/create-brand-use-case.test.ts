@@ -1,5 +1,5 @@
 import { describe, expect, it } from "../../../../../tests";
-import Brand from "../../models/brand";
+import Brand from "../../entities/brand";
 import { genRandomStr } from "../../../../../tests/utils";
 import FakeBrandsRepository from "../../repositories/fakes/fake-brands-repository";
 import CreateBrandUseCase, { CreateBrandParams } from "./create-brand-use-case";

@@ -2,7 +2,7 @@ import {
   HttpRequest,
   HttpResponse,
 } from "../../../../../infra/http/interfaces";
-import ProductsRepository from "../../repositories/implementations/ProductsRepository";
+import ProductsRepository from "../../repositories/implementations/products-repository";
 import ListProductsController from "./list-products-controller";
 import ListProductsUseCase from "./list-products-use-case";
 

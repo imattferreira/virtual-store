@@ -1,4 +1,4 @@
-import Brand from "../../models/brand";
+import Brand from "../../entities/brand";
 import { StoredBrand } from "../interfaces/stored-entities";
 
 class BrandMapper {
