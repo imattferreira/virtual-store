@@ -1,6 +1,7 @@
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { Fragment, ReactNode, useMemo, useRef } from "react";
 import { Container } from "./styles";
+import useLogic from "./useLogic";
 
 type GridVirtualListProps<ItemType> = {
   items: ItemType[];
@@ -8,61 +9,22 @@ type GridVirtualListProps<ItemType> = {
   render: (item: ItemType) => ReactNode;
 };
 
-const isFirstItem = (index: number) => index === 0;
-
-const getLastItem = <T extends unknown>(arr: T[]): T => arr[arr.length - 1];
-
 function VirtualGridList<ItemType>({
   items,
   cols,
   render,
 }: GridVirtualListProps<ItemType>) {
-  const parentRef = useRef(null);
-
-  const gridItems = useMemo(() => {
-    const result: ItemType[][] = [];
-
-    items.forEach((item, index) => {
-      if (isFirstItem(index)) {
-        result.push([]);
-        return;
-      }
-
-      const column = getLastItem<ItemType[]>(result);
-
-      if (column.length === cols) {
-        result.push([item]);
-        return;
-      }
-
-      column.push(item);
-    });
-
-    return result;
-  }, [cols, items]);
-
-  const rowVirtualizer = useVirtualizer({
-    count: gridItems.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 50, // TODO
-    overscan: 5, // TODO
-  });
-
-  const columnVirtualizer = useVirtualizer({
-    count: cols, // TODO
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 100, // TODO
-    overscan: 5, // TODO
-  });
+  const { parentRef, virtualizedColumn, virtualizedRow, gridItems } =
+    useLogic<ItemType>({ items, cols });
 
   return (
     <Container
       ref={parentRef}
       style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}
     >
-      {rowVirtualizer.getVirtualItems().map((virtualRow) => (
+      {virtualizedRow.getVirtualItems().map((virtualRow) => (
         <Fragment key={virtualRow.key}>
-          {columnVirtualizer.getVirtualItems().map((virtualColumn) => {
+          {virtualizedColumn.getVirtualItems().map((virtualColumn) => {
             const item = gridItems[virtualRow.index][virtualColumn.index];
 
             // workaround when the last column don't is has all indexes filled
