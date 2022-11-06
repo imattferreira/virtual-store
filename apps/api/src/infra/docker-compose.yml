@@ -7,7 +7,7 @@ services:
     env_file:
       - ../../.env.dev
     ports:
-      - "54320:5432"
+      - "54420:5432"
     volumes:
       - postgres_data:/data/postgres
     restart: unless-stopped

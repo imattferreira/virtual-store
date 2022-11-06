@@ -1,5 +1,4 @@
-import { useVirtualizer } from "@tanstack/react-virtual";
-import { Fragment, ReactNode, useMemo, useRef } from "react";
+import { Fragment, ReactNode } from "react";
 import { Container } from "./styles";
 import useLogic from "./useLogic";
 
@@ -22,16 +21,20 @@ function VirtualGridList<ItemType>({
       ref={parentRef}
       style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}
     >
-      {virtualizedRow.getVirtualItems().map((virtualRow) => (
-        <Fragment key={virtualRow.key}>
-          {virtualizedColumn.getVirtualItems().map((virtualColumn) => {
-            const item = gridItems[virtualRow.index][virtualColumn.index];
+      {virtualizedRow
+        .getVirtualItems()
+        .map(({ index: virtualRowIndex, key: virtualRowKey }) => (
+          <Fragment key={virtualRowKey}>
+            {virtualizedColumn
+              .getVirtualItems()
+              .map(({ index: virtualColumnIndex }) => {
+                const item = gridItems[virtualRowIndex][virtualColumnIndex];
 
-            // workaround when the last column don't is has all indexes filled
-            return item === undefined ? null : render(item);
-          })}
-        </Fragment>
-      ))}
+                // workaround when the last column don't is has all indexes filled
+                return !!item ? render(item) : null;
+              })}
+          </Fragment>
+        ))}
     </Container>
   );
 }

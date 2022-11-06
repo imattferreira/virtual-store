@@ -16,7 +16,7 @@ class ProductRepository {
     this.httpClient = new HttpClient();
   }
 
-  getBySlug(slug: string): Promise<GetProductResponse> {
+  getBySlug(slug: string): Promise<GetProductResponse | null> {
     try {
       return this.httpClient.get<GetProductResponse>(`/products/${slug}`);
     } catch {

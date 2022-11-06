@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import Link from "../Link";
 import { Container } from "./styles";
@@ -35,4 +36,4 @@ function ProductCard({ image, name, price, slug }: ProductCardProps) {
   );
 }
 
-export default ProductCard;
+export default memo(ProductCard);

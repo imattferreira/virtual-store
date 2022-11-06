@@ -6,6 +6,7 @@ export default globalCss({
     m: 0,
     p: 0,
     scrollBehavior: "smooth",
+    // fontFamily: "Roboto, sans-serif",
   },
   html: {
     "@media (max-width: 1080px)": {
@@ -19,7 +20,7 @@ export default globalCss({
     },
   },
   a: {
-    color: '$blue600',
+    color: "$blue600",
     textDecoration: "none",
   },
   button: {
