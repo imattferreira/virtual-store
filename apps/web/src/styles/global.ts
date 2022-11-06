@@ -6,7 +6,7 @@ export default globalCss({
     m: 0,
     p: 0,
     scrollBehavior: "smooth",
-    // fontFamily: "Roboto, sans-serif",
+    fontFamily: "Roboto, sans-serif",
   },
   html: {
     "@media (max-width: 1080px)": {
